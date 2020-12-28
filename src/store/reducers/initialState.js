@@ -1,3 +1,3 @@
 export const initialState = {
-  isLogged: false,
+  isLogged: localStorage.getItem('isLogged'),
 };

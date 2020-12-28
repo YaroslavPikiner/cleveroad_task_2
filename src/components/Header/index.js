@@ -5,19 +5,21 @@ import "firebase/auth";
 import { connect } from "react-redux";
 import {SIGNOUT} from '../../store/types'
 
-const Header = ({ isLogged,setLogged }) => {
+const Header = ({ isLogged,singOut }) => {
   const history = useHistory();
 
   function signOut() {
     firebase
       .auth()
       .signOut()
-      .then(function () {
-        setLogged();
+      .then( () => {
+        localStorage.setItem('isLogged', 'false')
+        singOut();
         history.push("/");
       })
       .catch(function (error) {
         // An error happened.
+        console.log(error)
       });
   }
 
@@ -29,7 +31,7 @@ const Header = ({ isLogged,setLogged }) => {
             Catalog-App
           </Link>
           <ul id="nav-mobile" className="right">
-            {isLogged ? (
+            {isLogged === 'true' ? (
               <>
                 <li className="nav-item ">
                   <Link to="/product"> Products </Link>
@@ -68,7 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLogged: () => dispatch({ type: SIGNOUT}),
+    singOut: () => dispatch({ type: SIGNOUT}),
   };
 };
 

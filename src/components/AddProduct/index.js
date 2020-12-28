@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./addProduct.css";
 import firebase from "firebase/app";
 import firebaseConfig from "../../firebaseConfig";
-import "firebase/database";
 import { useHistory } from "react-router";
+import "firebase/database";
 
 const AddProduct = () => {
   const [form, setForm] = useState({
@@ -33,7 +33,6 @@ const AddProduct = () => {
   function onSubmitHandle(e) {
     e.preventDefault();
     saveProduct(form);
-    console.log(form);
   }
 
   function saveProduct(data) {

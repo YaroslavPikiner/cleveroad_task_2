@@ -1,0 +1,16 @@
+.product__list {
+  width: auto;
+  margin: 20px;
+}
+
+.item__area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  color: aliceblue;
+}

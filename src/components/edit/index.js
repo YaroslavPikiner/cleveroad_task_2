@@ -27,9 +27,14 @@ function Edit({ match }) {
   }
 
   function imageChange(e) {
-    let img = e.target.files[0]
-    setForm((form) => ({ ...form.image, image: URL.createObjectURL(img) }))
-    console.log(form)
+    e.preventDefault();
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setForm((form) => ({ ...form.image, image: file, base64: reader.result}));
+      console.log(form)
+    };
   }
 
   function onSubmitHandle(e) {
@@ -58,7 +63,13 @@ function Edit({ match }) {
           <div className='file-field input-field '>
             <div className='btn'>
               <span>File</span>
-              <input type='file' id='image' required onChange={imageChange} />
+              <input
+                type='file'
+                id='image'
+                accept={'.jpeg, .png, .jpg'}
+                required
+                onChange={imageChange}
+              />
             </div>
             <div className='file-path-wrapper'>
               <input className='file-path validate' type='text' />
@@ -115,12 +126,19 @@ function Edit({ match }) {
           <div className='row'>
             <div className='input-field col s12'>
               <label htmlFor='deadline_sale'>Deadline Sale</label>
-              <input
-                type='date'
-                id='deadline_sale'
-                required
-                onChange={handleChange}
-              />
+              {form.sale ? (
+                <input
+                  type='date'
+                  id='deadline_sale'
+                  onChange={handleChange}
+                />
+              ) : (
+                <input
+                  type='number'
+                  id='deadline_sale'
+                  onChange={handleChange}
+                />
+              )}
             </div>
           </div>
           <button

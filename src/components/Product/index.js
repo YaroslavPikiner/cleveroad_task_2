@@ -2,11 +2,11 @@ import React from 'react'
 import './product.css'
 
 const Product = ({ item, deleteProductCard, editProductCard }) => {
-  const { name, description, image, price, sale, deadline_sale, id } = item.data
+  const { name, description, base64, price, sale, deadline_sale, id } = item.data
   return (
     <div className='card'>
       <div className='card-image waves-effect waves-block waves-light'>
-        <img className='activator' src={image} alt='prod' />
+        <img className='activator' src={base64} alt='prod' />
       </div>
       <div className='card-content'>
         <span className='card-title activator grey-text text-darken-4'>
